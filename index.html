@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Silver Fine Calculator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header>
+            <h1>Silver Fine Calculator</h1>
+            <p>Calculate the fine silver present in multiple pieces</p>
+        </header>
+
+
+        <!-- ADD PIECE -->
+        <section class="card add-piece-card">
+
+            <h2>Add Silver Piece</h2>
+
+            <div class="form-grid">
+
+                <!-- ITEM NAME -->
+                <div class="input-group item-input-group">
+
+                    <label for="pieceName">
+                        Item Name
+                    </label>
+
+                    <div class="item-select-row">
+
+                        <select id="pieceName">
+
+                            <option value="">
+                                Select Item
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            type="button"
+                            id="addItemBtn"
+                            class="add-item-btn"
+                            title="Add new item"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WEIGHT -->
+                <div class="input-group">
+
+                    <label for="weight">
+                        Weight (g)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="weight"
+                        placeholder="Enter weight"
+                        step="0.001"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <!-- TOUCH -->
+                <div class="input-group">
+
+                    <label for="touch">
+                        Touch (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="touch"
+                        placeholder="Enter touch"
+                        step="0.01"
+                        min="0"
+                        max="100"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="addPieceBtn"
+                class="add-btn"
+            >
+                + Add Piece
+            </button>
+
+        </section>
+
+
+
+        <!-- SILVER PIECES TABLE -->
+        <section class="card">
+
+            <div class="section-header">
+
+                <h2>Silver Pieces</h2>
+
+
+                <div class="header-buttons">
+
+                    <button
+                        id="printBtn"
+                        class="print-btn"
+                    >
+                        🖨 Print
+                    </button>
+
+
+                    <button
+                        id="clearBtn"
+                        class="clear-btn"
+                    >
+                        Clear All
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Item</th>
+
+                            <th>Weight (g)</th>
+
+                            <th>Touch (%)</th>
+
+                            <th>Fine (g)</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="piecesTableBody">
+
+                        <!-- JavaScript adds rows -->
+
+                    </tbody>
+
+                </table>
+
+
+                <div
+                    id="emptyMessage"
+                    class="empty-message"
+                >
+                    No silver pieces added yet.
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- TOTAL SUMMARY -->
+        <section class="summary">
+
+
+            <!-- TOTAL PIECES -->
+            <div class="summary-box">
+
+                <span>
+                    Total Pieces
+                </span>
+
+                <strong id="totalPieces">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <!-- TOTAL WEIGHT -->
+            <div class="summary-box">
+
+                <span>
+                    Total Weight
+                </span>
+
+                <strong>
+
+                    <span id="totalWeight">
+                        0.000
+                    </span>
+
+                    <span class="unit">
+                        g
+                    </span>
+
+                </strong>
+
+            </div>
+
+
+
+            <!-- TOTAL FINE -->
+            <div class="summary-box fine-box">
+
+                <span>
+                    Total Fine Silver
+                </span>
+
+                <strong>
+
+                    <span id="totalFine">
+                        0.000
+                    </span>
+
+                    <span class="unit">
+                        g
+                    </span>
+
+                </strong>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FORMULA -->
+        <section class="formula">
+
+            <h3>
+                Fine Calculation
+            </h3>
+
+            <p>
+                <strong>
+                    Fine = (Weight × Touch) / 100
+                </strong>
+            </p>
+
+            <p class="example">
+                Example:
+                100g × 80% ÷ 100 = 80g Fine
+            </p>
+
+        </section>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
