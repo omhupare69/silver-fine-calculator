@@ -46,7 +46,6 @@ const defaultItems = [
 ];
 
 
-
 /* =====================================
    LOAD CUSTOM ITEMS
    ===================================== */
@@ -59,7 +58,6 @@ let customItems =
     ) || [];
 
 
-
 /* =====================================
    COMBINE DEFAULT + CUSTOM ITEMS
    ===================================== */
@@ -70,13 +68,11 @@ let allItems = [
 ];
 
 
-
 /* =====================================
    SILVER PIECES
    ===================================== */
 
 let pieces = [];
-
 
 
 /* =====================================
@@ -88,72 +84,70 @@ const pieceNameInput =
         "pieceName"
     );
 
-
 const weightInput =
     document.getElementById(
         "weight"
     );
-
 
 const touchInput =
     document.getElementById(
         "touch"
     );
 
+const majuriInput =
+    document.getElementById(
+        "majuri"
+    );
 
 const addPieceBtn =
     document.getElementById(
         "addPieceBtn"
     );
 
-
 const addItemBtn =
     document.getElementById(
         "addItemBtn"
     );
-
 
 const clearBtn =
     document.getElementById(
         "clearBtn"
     );
 
-
 const printBtn =
     document.getElementById(
         "printBtn"
     );
-
 
 const tableBody =
     document.getElementById(
         "piecesTableBody"
     );
 
-
 const emptyMessage =
     document.getElementById(
         "emptyMessage"
     );
-
 
 const totalPiecesElement =
     document.getElementById(
         "totalPieces"
     );
 
-
 const totalWeightElement =
     document.getElementById(
         "totalWeight"
     );
-
 
 const totalFineElement =
     document.getElementById(
         "totalFine"
     );
 
+const totalMajuriElement =
+    document.getElementById(
+        "totalMajuri"
+    );
 
 
 /* =====================================
@@ -196,7 +190,6 @@ function loadItemDropdown() {
     );
 
 }
-
 
 
 /* =====================================
@@ -297,7 +290,6 @@ function addNewItem() {
 }
 
 
-
 /* =====================================
    FINE CALCULATION
    ===================================== */
@@ -320,13 +312,11 @@ function calculateFine(
 }
 
 
-
 /* =====================================
    ADD PIECE
    ===================================== */
 
 function addPiece() {
-
 
     const name =
         pieceNameInput.value;
@@ -343,6 +333,11 @@ function addPiece() {
             touchInput.value
         );
 
+
+    const majuri =
+        Number(
+            majuriInput.value
+        );
 
 
     /* =================================
@@ -392,6 +387,20 @@ function addPiece() {
     }
 
 
+    if (
+        !Number.isFinite(majuri) ||
+        majuri < 0
+    ) {
+
+        alert(
+            "Please enter a valid Majuri."
+        );
+
+        majuriInput.focus();
+
+        return;
+    }
+
 
     /* =================================
        CALCULATE FINE
@@ -402,7 +411,6 @@ function addPiece() {
             weight,
             touch
         );
-
 
 
     /* =================================
@@ -424,11 +432,13 @@ function addPiece() {
         touch:
             touch,
 
+        majuri:
+            majuri,
+
         fine:
             fine
 
     };
-
 
 
     /* Add piece */
@@ -438,13 +448,11 @@ function addPiece() {
     );
 
 
-
     /* Update screen */
 
     renderPieces();
 
     updateTotals();
-
 
 
     /* Clear inputs */
@@ -455,6 +463,8 @@ function addPiece() {
 
     touchInput.value = "";
 
+    majuriInput.value = "";
+
 
     /* Focus item dropdown */
 
@@ -463,18 +473,15 @@ function addPiece() {
 }
 
 
-
 /* =====================================
    DISPLAY PIECES
    ===================================== */
 
 function renderPieces() {
 
-
     /* Clear table */
 
     tableBody.innerHTML = "";
-
 
 
     /* No pieces */
@@ -496,12 +503,10 @@ function renderPieces() {
         "none";
 
 
-
     /* Create rows */
 
     pieces.forEach(
         (piece, index) => {
-
 
             const row =
                 document.createElement(
@@ -530,6 +535,11 @@ function renderPieces() {
 
                 <td>
                     ${piece.touch.toFixed(2)}%
+                </td>
+
+
+                <td>
+                    ${piece.majuri.toFixed(2)}
                 </td>
 
 
@@ -562,13 +572,11 @@ function renderPieces() {
 }
 
 
-
 /* =====================================
    DELETE PIECE
    ===================================== */
 
 function deletePiece(id) {
-
 
     pieces =
         pieces.filter(
@@ -584,18 +592,17 @@ function deletePiece(id) {
 }
 
 
-
 /* =====================================
    UPDATE TOTALS
    ===================================== */
 
 function updateTotals() {
 
-
     let totalWeight = 0;
 
     let totalFine = 0;
 
+    let totalMajuri = 0;
 
 
     pieces.forEach(
@@ -607,9 +614,11 @@ function updateTotals() {
             totalFine +=
                 piece.fine;
 
+            totalMajuri +=
+                piece.majuri;
+
         }
     );
-
 
 
     totalPiecesElement.textContent =
@@ -623,8 +632,11 @@ function updateTotals() {
     totalFineElement.textContent =
         totalFine.toFixed(3);
 
-}
 
+    totalMajuriElement.textContent =
+        totalMajuri.toFixed(2);
+
+}
 
 
 /* =====================================
@@ -632,7 +644,6 @@ function updateTotals() {
    ===================================== */
 
 function clearAll() {
-
 
     if (
         pieces.length === 0
@@ -664,7 +675,6 @@ function clearAll() {
 }
 
 
-
 /* =====================================
    PRINT
    ===================================== */
@@ -674,7 +684,6 @@ function printPage() {
     window.print();
 
 }
-
 
 
 /* =====================================
@@ -688,13 +697,14 @@ function escapeHTML(value) {
             "div"
         );
 
+
     div.textContent =
         value;
+
 
     return div.innerHTML;
 
 }
-
 
 
 /* =====================================
@@ -725,7 +735,6 @@ printBtn.addEventListener(
 );
 
 
-
 /* =====================================
    ENTER KEY
    ===================================== */
@@ -750,13 +759,14 @@ document.addEventListener(
 
             /*
                 Don't add a piece when
-                typing/using the dropdown.
+                using the dropdown.
             */
 
             if (
                 document.activeElement ===
                 pieceNameInput
             ) {
+
                 return;
             }
 
@@ -767,7 +777,6 @@ document.addEventListener(
 
     }
 );
-
 
 
 /* =====================================
