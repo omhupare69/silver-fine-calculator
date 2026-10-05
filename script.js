@@ -236,7 +236,10 @@ function addPiece() {
 
     /* ---------- CALCULATIONS ---------- */
 
-    const fine = calculateFine(weight, touch);
+    const fine = calculateFine(
+        weight,
+        touch
+    );
 
     const majuri = calculateMajuri(
         weight,
@@ -258,9 +261,9 @@ function addPiece() {
 
         majuriRate: majuriRate,
 
-        majuri: majuri,
+        fine: fine,
 
-        fine: fine
+        majuri: majuri
     };
 
 
@@ -319,9 +322,9 @@ function renderPieces() {
 
             <td>${piece.touch.toFixed(2)}</td>
 
-            <td>₹${piece.majuri.toFixed(2)}</td>
-
             <td>${piece.fine.toFixed(3)}</td>
+
+            <td>₹${piece.majuri.toFixed(2)}</td>
 
             <td>
                 <button
@@ -434,7 +437,9 @@ function printPage() {
 
     if (pieces.length === 0) {
 
-        alert("Please add at least one silver piece before printing.");
+        alert(
+            "Please add at least one silver piece before printing."
+        );
 
         return;
     }
@@ -468,7 +473,10 @@ tableBody.addEventListener("click", function(event) {
     }
 
 
-    const id = Number(deleteButton.dataset.id);
+    const id = Number(
+        deleteButton.dataset.id
+    );
+
 
     deletePiece(id);
 });

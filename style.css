@@ -18,6 +18,7 @@ body {
     padding: 25px 0 40px;
 }
 
+
 /* ================= HEADER ================= */
 
 header {
@@ -35,6 +36,7 @@ header p {
     font-size: 15px;
 }
 
+
 /* ================= CARD ================= */
 
 .card {
@@ -49,6 +51,7 @@ header p {
     font-size: 21px;
     margin-bottom: 20px;
 }
+
 
 /* ================= FORM ================= */
 
@@ -88,6 +91,7 @@ header p {
     border-color: #555;
 }
 
+
 /* ================= ITEM SELECT ================= */
 
 .item-select-row {
@@ -114,7 +118,8 @@ header p {
     background: #111;
 }
 
-/* ================= BUTTON ================= */
+
+/* ================= ADD BUTTON ================= */
 
 .add-btn {
     margin-top: 20px;
@@ -132,6 +137,7 @@ header p {
 .add-btn:hover {
     background: #000;
 }
+
 
 /* ================= SECTION HEADER ================= */
 
@@ -179,6 +185,7 @@ header p {
 .clear-btn:hover {
     background: #d5d5d5;
 }
+
 
 /* ================= TABLE ================= */
 
@@ -228,6 +235,7 @@ tbody tr:hover {
     background: #b02a37;
 }
 
+
 /* ================= EMPTY ================= */
 
 .empty-message {
@@ -236,6 +244,7 @@ tbody tr:hover {
     color: #777;
     font-size: 14px;
 }
+
 
 /* ================= SUMMARY ================= */
 
@@ -281,6 +290,7 @@ tbody tr:hover {
     border-top: 4px solid #777;
 }
 
+
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 1100px) {
@@ -293,6 +303,7 @@ tbody tr:hover {
         grid-template-columns: 1fr 1fr;
     }
 }
+
 
 @media (max-width: 768px) {
 
@@ -332,6 +343,7 @@ tbody tr:hover {
         flex: 1;
     }
 }
+
 
 /* ================= PRINT ================= */
 
