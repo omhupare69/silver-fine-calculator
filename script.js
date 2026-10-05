@@ -1,14 +1,11 @@
-/* =====================================
+/* =========================================================
    SILVER FINE CALCULATOR
-   ===================================== */
+   ========================================================= */
 
 
-/* =====================================
-   DEFAULT ITEM CATALOG
-   ===================================== */
+/* ================= DEFAULT ITEMS ================= */
 
 const defaultItems = [
-
     "Chatai Payal",
     "Selam ChumChum",
     "Mathura Khushbu ChumChum",
@@ -42,313 +39,164 @@ const defaultItems = [
     "Neck Chain",
     "Ek Rava Rupali",
     "3 Kalash"
-
 ];
 
 
-/* =====================================
-   LOAD CUSTOM ITEMS
-   ===================================== */
+/* ================= STORAGE ================= */
 
-let customItems =
-    JSON.parse(
-        localStorage.getItem(
-            "silverCustomItems"
-        )
-    ) || [];
-
-
-/* =====================================
-   COMBINE DEFAULT + CUSTOM ITEMS
-   ===================================== */
-
-let allItems = [
-    ...defaultItems,
-    ...customItems
-];
-
-
-/* =====================================
-   SILVER PIECES
-   ===================================== */
+const CUSTOM_ITEMS_KEY = "silverCustomItems";
 
 let pieces = [];
 
-
-/* =====================================
-   GET HTML ELEMENTS
-   ===================================== */
-
-const pieceNameInput =
-    document.getElementById(
-        "pieceName"
-    );
-
-const weightInput =
-    document.getElementById(
-        "weight"
-    );
-
-const touchInput =
-    document.getElementById(
-        "touch"
-    );
-
-const majuriInput =
-    document.getElementById(
-        "majuri"
-    );
-
-const addPieceBtn =
-    document.getElementById(
-        "addPieceBtn"
-    );
-
-const addItemBtn =
-    document.getElementById(
-        "addItemBtn"
-    );
-
-const clearBtn =
-    document.getElementById(
-        "clearBtn"
-    );
-
-const printBtn =
-    document.getElementById(
-        "printBtn"
-    );
-
-const tableBody =
-    document.getElementById(
-        "piecesTableBody"
-    );
-
-const emptyMessage =
-    document.getElementById(
-        "emptyMessage"
-    );
-
-const totalPiecesElement =
-    document.getElementById(
-        "totalPieces"
-    );
-
-const totalWeightElement =
-    document.getElementById(
-        "totalWeight"
-    );
-
-const totalFineElement =
-    document.getElementById(
-        "totalFine"
-    );
-
-const totalMajuriElement =
-    document.getElementById(
-        "totalMajuri"
-    );
+let customItems = JSON.parse(
+    localStorage.getItem(CUSTOM_ITEMS_KEY) || "[]"
+);
 
 
-/* =====================================
-   LOAD ITEM DROPDOWN
-   ===================================== */
+/* ================= DOM ELEMENTS ================= */
 
-function loadItemDropdown() {
+const pieceNameInput = document.getElementById("pieceName");
+const weightInput = document.getElementById("weight");
+const touchInput = document.getElementById("touch");
+const majuriInput = document.getElementById("majuri");
 
-    /*
-        Remove existing options except
-        the first "Select Item" option.
-    */
+const addPieceBtn = document.getElementById("addPieceBtn");
+const addItemBtn = document.getElementById("addItemBtn");
 
-    pieceNameInput.innerHTML = `
-        <option value="">
-            Select Item
-        </option>
-    `;
+const tableBody = document.getElementById("piecesTableBody");
+const emptyMessage = document.getElementById("emptyMessage");
+
+const clearBtn = document.getElementById("clearBtn");
+const printBtn = document.getElementById("printBtn");
+
+const totalPiecesElement = document.getElementById("totalPieces");
+const totalWeightElement = document.getElementById("totalWeight");
+const totalFineElement = document.getElementById("totalFine");
+const totalMajuriElement = document.getElementById("totalMajuri");
 
 
-    /* Add all items */
+/* ================= ITEM LIST ================= */
 
-    allItems.forEach(
-        item => {
+function getAllItems() {
 
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value = item;
-
-            option.textContent = item;
-
-            pieceNameInput.appendChild(
-                option
-            );
-
-        }
-    );
-
+    return [
+        ...defaultItems,
+        ...customItems
+    ];
 }
 
 
-/* =====================================
-   ADD NEW ITEM TO CATALOG
-   ===================================== */
+/* ================= LOAD DROPDOWN ================= */
+
+function loadItems() {
+
+    pieceNameInput.innerHTML = `
+        <option value="">Select Item</option>
+    `;
+
+    const allItems = getAllItems();
+
+    allItems.forEach(item => {
+
+        const option = document.createElement("option");
+
+        option.value = item;
+        option.textContent = item;
+
+        pieceNameInput.appendChild(option);
+
+    });
+}
+
+
+/* ================= ADD CUSTOM ITEM ================= */
 
 function addNewItem() {
 
-    const newItem =
-        prompt(
-            "Enter new item name:"
-        );
+    const itemName = prompt("Enter new item name:");
 
-
-    /* User cancelled */
-
-    if (newItem === null) {
-
+    if (!itemName) {
         return;
     }
 
+    const cleanName = itemName.trim();
 
-    const itemName =
-        newItem.trim();
-
-
-    /* Empty name */
-
-    if (itemName === "") {
-
-        alert(
-            "Please enter an item name."
-        );
-
+    if (!cleanName) {
         return;
     }
 
-
-    /* Check duplicate */
-
-    const alreadyExists =
-        allItems.some(
-            item =>
-                item.toLowerCase() ===
-                itemName.toLowerCase()
-        );
-
-
-    if (alreadyExists) {
-
-        alert(
-            "This item already exists in the catalogue."
-        );
-
-        return;
-    }
-
-
-    /* Add custom item */
-
-    customItems.push(
-        itemName
+    const exists = getAllItems().some(
+        item => item.toLowerCase() === cleanName.toLowerCase()
     );
 
+    if (exists) {
 
-    /* Save in browser */
+        alert("This item already exists.");
+
+        return;
+    }
+
+    customItems.push(cleanName);
 
     localStorage.setItem(
-        "silverCustomItems",
-        JSON.stringify(
-            customItems
-        )
+        CUSTOM_ITEMS_KEY,
+        JSON.stringify(customItems)
     );
 
+    loadItems();
 
-    /* Update combined list */
+    pieceNameInput.value = cleanName;
 
-    allItems.push(
-        itemName
-    );
-
-
-    /* Reload dropdown */
-
-    loadItemDropdown();
-
-
-    /* Automatically select new item */
-
-    pieceNameInput.value =
-        itemName;
-
-
-    alert(
-        `"${itemName}" has been added to the catalogue.`
-    );
-
+    pieceNameInput.focus();
 }
 
 
-/* =====================================
-   FINE CALCULATION
-   ===================================== */
+/* ================= CALCULATE FINE ================= */
+
+function calculateFine(weight, touch) {
+
+    return (weight * touch) / 100;
+}
+
+
+/* ================= CALCULATE MAJURI ================= */
 
 /*
+    Majuri entered by user = rate per kilogram.
 
-    Fine = (Weight × Touch) / 100
+    Example:
+    Weight = 250 grams
+    Majuri = ₹800/kg
 
+    Making Charges =
+    (250 / 1000) × 800
+    = ₹200
 */
 
-function calculateFine(
-    weight,
-    touch
-) {
+function calculateMajuri(weight, majuriRate) {
 
-    return (
-        weight * touch
-    ) / 100;
-
+    return (weight / 1000) * majuriRate;
 }
 
 
-/* =====================================
-   ADD PIECE
-   ===================================== */
+/* ================= ADD PIECE ================= */
 
 function addPiece() {
 
-    const name =
-        pieceNameInput.value;
+    const itemName = pieceNameInput.value.trim();
+
+    const weight = Number(weightInput.value);
+
+    const touch = Number(touchInput.value);
+
+    const majuriRate = Number(majuriInput.value);
 
 
-    const weight =
-        Number(
-            weightInput.value
-        );
+    /* ---------- VALIDATION ---------- */
 
+    if (!itemName) {
 
-    const touch =
-        Number(
-            touchInput.value
-        );
-
-
-    const majuri =
-        Number(
-            majuriInput.value
-        );
-
-
-    /* =================================
-       VALIDATION
-       ================================= */
-
-    if (name === "") {
-
-        alert(
-            "Please select an item."
-        );
+        alert("Please select an item.");
 
         pieceNameInput.focus();
 
@@ -356,14 +204,9 @@ function addPiece() {
     }
 
 
-    if (
-        !Number.isFinite(weight) ||
-        weight <= 0
-    ) {
+    if (!Number.isFinite(weight) || weight <= 0) {
 
-        alert(
-            "Please enter a valid weight."
-        );
+        alert("Please enter a valid weight.");
 
         weightInput.focus();
 
@@ -371,15 +214,9 @@ function addPiece() {
     }
 
 
-    if (
-        !Number.isFinite(touch) ||
-        touch < 0 ||
-        touch > 100
-    ) {
+    if (!Number.isFinite(touch) || touch < 0 || touch > 100) {
 
-        alert(
-            "Please enter a valid touch between 0 and 100."
-        );
+        alert("Please enter a valid touch between 0 and 100.");
 
         touchInput.focus();
 
@@ -387,14 +224,9 @@ function addPiece() {
     }
 
 
-    if (
-        !Number.isFinite(majuri) ||
-        majuri < 0
-    ) {
+    if (!Number.isFinite(majuriRate) || majuriRate < 0) {
 
-        alert(
-            "Please enter a valid Majuri."
-        );
+        alert("Please enter a valid Majuri rate per kg.");
 
         majuriInput.focus();
 
@@ -402,60 +234,47 @@ function addPiece() {
     }
 
 
-    /* =================================
-       CALCULATE FINE
-       ================================= */
+    /* ---------- CALCULATIONS ---------- */
 
-    const fine =
-        calculateFine(
-            weight,
-            touch
-        );
+    const fine = calculateFine(weight, touch);
 
-
-    /* =================================
-       CREATE PIECE
-       ================================= */
-
-    const piece = {
-
-        id:
-            Date.now() +
-            Math.random(),
-
-        name:
-            name,
-
-        weight:
-            weight,
-
-        touch:
-            touch,
-
-        majuri:
-            majuri,
-
-        fine:
-            fine
-
-    };
-
-
-    /* Add piece */
-
-    pieces.push(
-        piece
+    const majuri = calculateMajuri(
+        weight,
+        majuriRate
     );
 
 
-    /* Update screen */
+    /* ---------- CREATE PIECE ---------- */
+
+    const piece = {
+
+        id: Date.now() + Math.random(),
+
+        itemName: itemName,
+
+        weight: weight,
+
+        touch: touch,
+
+        majuriRate: majuriRate,
+
+        majuri: majuri,
+
+        fine: fine
+    };
+
+
+    pieces.push(piece);
+
+
+    /* ---------- UPDATE UI ---------- */
 
     renderPieces();
 
     updateTotals();
 
 
-    /* Clear inputs */
+    /* ---------- CLEAR INPUTS ---------- */
 
     pieceNameInput.value = "";
 
@@ -465,136 +284,77 @@ function addPiece() {
 
     majuriInput.value = "";
 
-
-    /* Focus item dropdown */
-
     pieceNameInput.focus();
-
 }
 
 
-/* =====================================
-   DISPLAY PIECES
-   ===================================== */
+/* ================= RENDER PIECES ================= */
 
 function renderPieces() {
 
-    /* Clear table */
-
     tableBody.innerHTML = "";
 
+    if (pieces.length === 0) {
 
-    /* No pieces */
-
-    if (
-        pieces.length === 0
-    ) {
-
-        emptyMessage.style.display =
-            "block";
+        emptyMessage.style.display = "block";
 
         return;
     }
 
-
-    /* Hide empty message */
-
-    emptyMessage.style.display =
-        "none";
+    emptyMessage.style.display = "none";
 
 
-    /* Create rows */
+    pieces.forEach((piece, index) => {
 
-    pieces.forEach(
-        (piece, index) => {
-
-            const row =
-                document.createElement(
-                    "tr"
-                );
+        const row = document.createElement("tr");
 
 
-            row.innerHTML = `
+        row.innerHTML = `
 
-                <td>
-                    ${index + 1}
-                </td>
+            <td>${index + 1}</td>
 
+            <td>${escapeHTML(piece.itemName)}</td>
 
-                <td>
-                    ${escapeHTML(
-                        piece.name
-                    )}
-                </td>
+            <td>${piece.weight.toFixed(3)}</td>
 
+            <td>${piece.touch.toFixed(2)}</td>
 
-                <td>
-                    ${piece.weight.toFixed(3)}
-                </td>
+            <td>₹${piece.majuri.toFixed(2)}</td>
 
+            <td>${piece.fine.toFixed(3)}</td>
 
-                <td>
-                    ${piece.touch.toFixed(2)}%
-                </td>
+            <td>
+                <button
+                    class="delete-btn"
+                    data-id="${piece.id}">
+                    Delete
+                </button>
+            </td>
 
-
-                <td>
-                    ${piece.majuri.toFixed(2)}
-                </td>
+        `;
 
 
-                <td class="fine-value">
-                    ${piece.fine.toFixed(3)}
-                </td>
+        tableBody.appendChild(row);
 
-
-                <td>
-
-                    <button
-                        class="delete-btn"
-                        onclick="deletePiece(${piece.id})"
-                    >
-                        Delete
-                    </button>
-
-                </td>
-
-            `;
-
-
-            tableBody.appendChild(
-                row
-            );
-
-        }
-    );
-
+    });
 }
 
 
-/* =====================================
-   DELETE PIECE
-   ===================================== */
+/* ================= DELETE PIECE ================= */
 
 function deletePiece(id) {
 
-    pieces =
-        pieces.filter(
-            piece =>
-                piece.id !== id
-        );
-
+    pieces = pieces.filter(
+        piece => piece.id !== id
+    );
 
     renderPieces();
 
     updateTotals();
-
 }
 
 
-/* =====================================
-   UPDATE TOTALS
-   ===================================== */
+/* ================= UPDATE TOTALS ================= */
 
 function updateTotals() {
 
@@ -605,20 +365,15 @@ function updateTotals() {
     let totalMajuri = 0;
 
 
-    pieces.forEach(
-        piece => {
+    pieces.forEach(piece => {
 
-            totalWeight +=
-                piece.weight;
+        totalWeight += piece.weight;
 
-            totalFine +=
-                piece.fine;
+        totalFine += piece.fine;
 
-            totalMajuri +=
-                piece.majuri;
+        totalMajuri += piece.majuri;
 
-        }
-    );
+    });
 
 
     totalPiecesElement.textContent =
@@ -635,81 +390,91 @@ function updateTotals() {
 
     totalMajuriElement.textContent =
         totalMajuri.toFixed(2);
-
 }
 
 
-/* =====================================
-   CLEAR ALL
-   ===================================== */
+/* ================= CLEAR ALL ================= */
 
 function clearAll() {
 
-    if (
-        pieces.length === 0
-    ) {
-
+    if (pieces.length === 0) {
         return;
     }
 
 
-    const confirmed =
-        confirm(
-            "Are you sure you want to clear all pieces?"
-        );
+    const confirmed = confirm(
+        "Are you sure you want to clear all silver pieces?"
+    );
 
 
     if (!confirmed) {
-
         return;
     }
 
 
     pieces = [];
 
-
     renderPieces();
 
     updateTotals();
 
+    pieceNameInput.value = "";
+
+    weightInput.value = "";
+
+    touchInput.value = "";
+
+    majuriInput.value = "";
 }
 
 
-/* =====================================
-   PRINT
-   ===================================== */
+/* ================= PRINT ================= */
 
 function printPage() {
 
-    window.print();
+    if (pieces.length === 0) {
 
+        alert("Please add at least one silver piece before printing.");
+
+        return;
+    }
+
+    window.print();
 }
 
 
-/* =====================================
-   ESCAPE HTML
-   ===================================== */
+/* ================= ESCAPE HTML ================= */
 
 function escapeHTML(value) {
 
-    const div =
-        document.createElement(
-            "div"
-        );
+    const div = document.createElement("div");
 
-
-    div.textContent =
-        value;
-
+    div.textContent = value;
 
     return div.innerHTML;
-
 }
 
 
-/* =====================================
-   BUTTON EVENTS
-   ===================================== */
+/* ================= TABLE DELETE EVENT ================= */
+
+tableBody.addEventListener("click", function(event) {
+
+    const deleteButton =
+        event.target.closest(".delete-btn");
+
+
+    if (!deleteButton) {
+        return;
+    }
+
+
+    const id = Number(deleteButton.dataset.id);
+
+    deletePiece(id);
+});
+
+
+/* ================= BUTTON EVENTS ================= */
 
 addPieceBtn.addEventListener(
     "click",
@@ -735,55 +500,37 @@ printBtn.addEventListener(
 );
 
 
-/* =====================================
-   ENTER KEY
-   ===================================== */
+/* ================= ENTER KEY ================= */
 
-document.addEventListener(
-    "keydown",
-    function (event) {
+document.addEventListener("keydown", function(event) {
 
-        /*
-            Press Enter to add a piece.
-        */
-
-        if (
-            event.key === "Enter" &&
-            document.activeElement !==
-            addItemBtn &&
-            document.activeElement !==
-            clearBtn &&
-            document.activeElement !==
-            printBtn
-        ) {
-
-            /*
-                Don't add a piece when
-                using the dropdown.
-            */
-
-            if (
-                document.activeElement ===
-                pieceNameInput
-            ) {
-
-                return;
-            }
-
-
-            addPiece();
-
-        }
-
+    if (event.key !== "Enter") {
+        return;
     }
-);
 
 
-/* =====================================
-   INITIALIZE
-   ===================================== */
+    const activeElement = document.activeElement;
 
-loadItemDropdown();
+
+    if (
+        activeElement === pieceNameInput ||
+        activeElement === addItemBtn ||
+        activeElement === clearBtn ||
+        activeElement === printBtn
+    ) {
+        return;
+    }
+
+
+    event.preventDefault();
+
+    addPiece();
+});
+
+
+/* ================= INITIALIZE ================= */
+
+loadItems();
 
 renderPieces();
 

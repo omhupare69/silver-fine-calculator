@@ -1,7 +1,3 @@
-/* =====================================
-   GLOBAL
-   ===================================== */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,81 +5,58 @@
 }
 
 body {
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: #f3f5f7;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
     color: #222;
     min-height: 100vh;
 }
 
-
-/* =====================================
-   MAIN CONTAINER
-   ===================================== */
-
 .container {
     width: 95%;
-    max-width: 1200px;
-    margin: 40px auto;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 25px 0 40px;
 }
 
-
-/* =====================================
-   HEADER
-   ===================================== */
+/* ================= HEADER ================= */
 
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 header h1 {
-    font-size: 36px;
-    color: #333;
+    font-size: 32px;
     margin-bottom: 8px;
 }
 
 header p {
-    color: #777;
-    font-size: 16px;
+    color: #666;
+    font-size: 15px;
 }
 
-
-/* =====================================
-   CARDS
-   ===================================== */
+/* ================= CARD ================= */
 
 .card {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 25px;
-    margin-bottom: 25px;
-
-    box-shadow:
-        0 4px 15px
-        rgba(0, 0, 0, 0.07);
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
 }
 
 .card h2 {
+    font-size: 21px;
     margin-bottom: 20px;
-    font-size: 22px;
 }
 
-
-/* =====================================
-   FORM
-   ===================================== */
+/* ================= FORM ================= */
 
 .form-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 18px;
+    align-items: end;
 }
 
 .input-group {
@@ -92,159 +65,104 @@ header p {
 }
 
 .input-group label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 7px;
+    color: #333;
 }
 
+.input-group input,
+.input-group select {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+}
 
-/* =====================================
-   ITEM DROPDOWN
-   ===================================== */
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #555;
+}
+
+/* ================= ITEM SELECT ================= */
 
 .item-select-row {
     display: flex;
     gap: 8px;
-    width: 100%;
 }
 
 .item-select-row select {
     flex: 1;
-    min-width: 0;
 }
-
-.input-group select {
-    padding: 13px 14px;
-
-    border:
-        1px solid #ccc;
-
-    border-radius: 8px;
-
-    font-size: 16px;
-
-    background: white;
-    color: #222;
-
-    outline: none;
-
-    cursor: pointer;
-}
-
-.input-group select:focus {
-    border-color: #555;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(0, 0, 0, 0.05);
-}
-
-
-/* Add new item button */
 
 .add-item-btn {
-    width: 48px;
-    min-width: 48px;
-
-    padding: 0;
-
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 7px;
     background: #333;
     color: white;
-
     font-size: 24px;
-    line-height: 1;
-
-    border-radius: 8px;
+    cursor: pointer;
 }
 
 .add-item-btn:hover {
     background: #111;
 }
 
-
-/* =====================================
-   TEXT / NUMBER INPUTS
-   ===================================== */
-
-.input-group input {
-    padding: 13px 14px;
-
-    border:
-        1px solid #ccc;
-
-    border-radius: 8px;
-
-    font-size: 16px;
-
-    outline: none;
-
-    transition: 0.2s;
-}
-
-.input-group input:focus {
-    border-color: #555;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(0, 0, 0, 0.05);
-}
-
-
-/* =====================================
-   BUTTONS
-   ===================================== */
-
-button {
-    border: none;
-    cursor: pointer;
-
-    font-size: 15px;
-    font-weight: bold;
-
-    border-radius: 8px;
-}
+/* ================= BUTTON ================= */
 
 .add-btn {
     margin-top: 20px;
-
-    padding:
-        13px 24px;
-
-    background: #333;
+    width: 100%;
+    height: 46px;
+    border: none;
+    border-radius: 7px;
+    background: #222;
     color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .add-btn:hover {
-    background: #111;
+    background: #000;
 }
 
-
-/* =====================================
-   TABLE HEADER BUTTONS
-   ===================================== */
+/* ================= SECTION HEADER ================= */
 
 .section-header {
     display: flex;
-
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.section-header h2 {
+    margin-bottom: 0;
 }
 
 .header-buttons {
     display: flex;
-
     gap: 10px;
-
-    align-items: center;
 }
 
-
-/* Print */
+.print-btn,
+.clear-btn {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
 
 .print-btn {
-    padding:
-        9px 16px;
-
     background: #333;
     color: white;
 }
@@ -253,25 +171,16 @@ button {
     background: #111;
 }
 
-
-/* Clear */
-
 .clear-btn {
-    padding:
-        9px 16px;
-
-    background: #eeeeee;
-    color: #555;
+    background: #e8e8e8;
+    color: #222;
 }
 
 .clear-btn:hover {
-    background: #ddd;
+    background: #d5d5d5;
 }
 
-
-/* =====================================
-   TABLE
-   ===================================== */
+/* ================= TABLE ================= */
 
 .table-container {
     width: 100%;
@@ -280,350 +189,205 @@ button {
 
 table {
     width: 100%;
-
     border-collapse: collapse;
-
-    margin-top: 10px;
+    min-width: 800px;
 }
 
 thead {
-    background: #333;
+    background: #222;
     color: white;
 }
 
 th,
 td {
-    padding: 14px 12px;
-
+    padding: 13px 12px;
     text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
 
-    border-bottom:
-        1px solid #eee;
+th {
+    font-weight: 600;
 }
 
 tbody tr:hover {
-    background: #f8f8f8;
+    background: #f7f7f7;
 }
-
-.fine-value {
-    font-weight: bold;
-}
-
-
-/* =====================================
-   DELETE BUTTON
-   ===================================== */
 
 .delete-btn {
-    background: #f1f1f1;
-
-    color: #d33;
-
-    padding:
-        7px 12px;
+    border: none;
+    background: #dc3545;
+    color: white;
+    padding: 7px 11px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
 }
 
 .delete-btn:hover {
-    background: #ffe5e5;
+    background: #b02a37;
 }
 
-
-/* =====================================
-   EMPTY MESSAGE
-   ===================================== */
+/* ================= EMPTY ================= */
 
 .empty-message {
     text-align: center;
-
-    padding: 30px;
-
-    color: #888;
+    padding: 25px;
+    color: #777;
+    font-size: 14px;
 }
 
-
-/* =====================================
-   SUMMARY
-   ===================================== */
+/* ================= SUMMARY ================= */
 
 .summary {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 20px;
-
-    margin-bottom: 25px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 20px;
 }
 
 .summary-box {
     background: white;
-
-    border-radius: 14px;
-
-    padding: 25px;
-
+    border-radius: 12px;
+    padding: 20px;
     text-align: center;
-
-    box-shadow:
-        0 4px 15px
-        rgba(0, 0, 0, 0.07);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
 }
 
-.summary-box span {
+.summary-box span:first-child {
     display: block;
-
-    color: #777;
-
-    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
 }
 
 .summary-box strong {
-    font-size: 28px;
-    color: #333;
+    font-size: 24px;
+    color: #222;
 }
 
-.unit {
-    display: inline !important;
-
-    margin-left: 4px;
-
-    color: inherit !important;
+.summary-box .unit {
+    display: inline;
+    font-size: 14px;
+    margin-left: 3px;
+    color: #555;
 }
-
-
-/* =====================================
-   TOTAL FINE
-   ===================================== */
 
 .fine-box {
-    background: #333;
+    border-top: 4px solid #333;
 }
-
-.fine-box span,
-.fine-box strong {
-    color: white;
-}
-
-
-/* =====================================
-   TOTAL MAJURI
-   ===================================== */
 
 .majuri-box {
-    background: white;
+    border-top: 4px solid #777;
 }
 
-.majuri-box strong {
-    color: #333;
-}
+/* ================= RESPONSIVE ================= */
 
-
-/* =====================================
-   MOBILE
-   ===================================== */
-
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
 
     .form-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
     }
 
     .summary {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
     }
 }
-
 
 @media (max-width: 768px) {
 
     .container {
         width: 94%;
-        margin: 20px auto;
+        padding-top: 18px;
     }
 
     header h1 {
-        font-size: 28px;
+        font-size: 26px;
+    }
+
+    .card {
+        padding: 16px;
     }
 
     .form-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
     }
 
     .summary {
         grid-template-columns: 1fr;
     }
 
-    .card {
-        padding: 18px;
-    }
-
     .section-header {
-        align-items: flex-start;
-
-        gap: 15px;
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .header-buttons {
-        flex-direction: column;
+        width: 100%;
     }
 
-    th,
-    td {
-        padding:
-            10px 8px;
-
-        font-size: 14px;
+    .print-btn,
+    .clear-btn {
+        flex: 1;
     }
 }
 
-
-/* =====================================
-   PRINT VERSION
-   ===================================== */
+/* ================= PRINT ================= */
 
 @media print {
 
-    @page {
-        size: A4;
-        margin: 15mm;
-    }
-
     body {
         background: white;
-        color: black;
     }
 
     .container {
         width: 100%;
         max-width: none;
-        margin: 0;
+        padding: 0;
     }
 
     header {
-        display: block;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
     }
 
     header h1 {
-        font-size: 28px;
-        color: #000;
+        font-size: 24px;
     }
-
-    header p {
-        color: #555;
-    }
-
-
-    /* Hide Add Piece */
 
     .add-piece-card {
         display: none;
     }
 
-
-    /* Hide buttons */
-
     .header-buttons {
         display: none;
     }
 
-
-    /* Table card */
-
     .card {
         box-shadow: none;
-
-        border: none;
-
-        padding: 0;
-
-        margin:
-            0 0 20px 0;
+        border: 1px solid #ddd;
     }
-
-    table {
-        border:
-            1px solid #333;
-
-        margin-top: 10px;
-    }
-
-    thead {
-        background: #333 !important;
-        color: white !important;
-
-        -webkit-print-color-adjust:
-            exact;
-
-        print-color-adjust:
-            exact;
-    }
-
-    th,
-    td {
-        border:
-            1px solid #ccc;
-
-        padding: 10px;
-    }
-
-
-    /* Hide Action */
-
-    th:last-child,
-    td:last-child {
-        display: none;
-    }
-
-
-    /* Summary */
 
     .summary {
-        display: grid;
-
-        grid-template-columns:
-            repeat(4, 1fr);
-
-        gap: 10px;
-
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .summary-box {
         box-shadow: none;
-
-        border:
-            1px solid #ccc;
-
-        padding: 15px;
+        border: 1px solid #ddd;
     }
 
-
-    /* Fine */
-
-    .fine-box {
-        background: #333 !important;
-        color: white !important;
-
-        -webkit-print-color-adjust:
-            exact;
-
-        print-color-adjust:
-            exact;
-    }
-
-    .fine-box span,
-    .fine-box strong {
-        color: white !important;
-    }
-
-
-    /* Empty message */
-
-    .empty-message {
+    .delete-btn {
         display: none;
+    }
+
+    table {
+        min-width: 0;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        font-size: 12px;
     }
 }

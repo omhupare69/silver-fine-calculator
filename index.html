@@ -11,73 +11,52 @@
 
 <div class="container">
 
-    <!-- HEADER -->
     <header>
         <h1>Silver Fine Calculator</h1>
-        <p>Calculate the fine silver present in multiple pieces</p>
+        <p>Calculate fine silver and making charges for multiple pieces</p>
     </header>
 
-
-    <!-- ADD PIECE -->
+    <!-- Add Piece -->
     <section class="card add-piece-card">
 
         <h2>Add Silver Piece</h2>
 
         <div class="form-grid">
 
-            <!-- ITEM NAME -->
+            <!-- Item -->
             <div class="input-group item-input-group">
-
-                <label for="pieceName">
-                    Item Name
-                </label>
+                <label for="pieceName">Item Name</label>
 
                 <div class="item-select-row">
-
                     <select id="pieceName">
-                        <option value="">
-                            Select Item
-                        </option>
+                        <option value="">Select Item</option>
                     </select>
 
                     <button
                         type="button"
                         id="addItemBtn"
                         class="add-item-btn"
-                        title="Add new item"
-                    >
+                        title="Add new item">
                         +
                     </button>
-
                 </div>
-
             </div>
 
-
-            <!-- WEIGHT -->
+            <!-- Weight -->
             <div class="input-group">
-
-                <label for="weight">
-                    Weight (g)
-                </label>
+                <label for="weight">Weight (g)</label>
 
                 <input
                     type="number"
                     id="weight"
                     placeholder="Enter weight"
                     step="0.001"
-                    min="0"
-                >
-
+                    min="0">
             </div>
 
-
-            <!-- TOUCH -->
+            <!-- Touch -->
             <div class="input-group">
-
-                <label for="touch">
-                    Touch (%)
-                </label>
+                <label for="touch">Touch (%)</label>
 
                 <input
                     type="number"
@@ -85,44 +64,31 @@
                     placeholder="Enter touch"
                     step="0.01"
                     min="0"
-                    max="100"
-                >
-
+                    max="100">
             </div>
 
-
-            <!-- MAJURI -->
+            <!-- Majuri -->
             <div class="input-group">
-
-                <label for="majuri">
-                    Majuri
-                </label>
+                <label for="majuri">Majuri (₹/kg)</label>
 
                 <input
                     type="number"
                     id="majuri"
-                    placeholder="Enter Majuri"
+                    placeholder="Enter Majuri per kg"
                     step="0.01"
-                    min="0"
-                >
-
+                    min="0">
             </div>
 
         </div>
 
-
-        <button
-            id="addPieceBtn"
-            class="add-btn"
-        >
+        <button id="addPieceBtn" class="add-btn">
             + Add Piece
         </button>
 
     </section>
 
 
-
-    <!-- SILVER PIECES TABLE -->
+    <!-- Silver Pieces -->
     <section class="card">
 
         <div class="section-header">
@@ -131,17 +97,11 @@
 
             <div class="header-buttons">
 
-                <button
-                    id="printBtn"
-                    class="print-btn"
-                >
+                <button id="printBtn" class="print-btn">
                     🖨 Print
                 </button>
 
-                <button
-                    id="clearBtn"
-                    class="clear-btn"
-                >
+                <button id="clearBtn" class="clear-btn">
                     Clear All
                 </button>
 
@@ -155,7 +115,6 @@
             <table>
 
                 <thead>
-
                     <tr>
                         <th>#</th>
                         <th>Item</th>
@@ -165,21 +124,13 @@
                         <th>Fine (g)</th>
                         <th>Action</th>
                     </tr>
-
                 </thead>
 
-
-                <tbody id="piecesTableBody">
-                    <!-- JavaScript adds rows -->
-                </tbody>
+                <tbody id="piecesTableBody"></tbody>
 
             </table>
 
-
-            <div
-                id="emptyMessage"
-                class="empty-message"
-            >
+            <div id="emptyMessage" class="empty-message">
                 No silver pieces added yet.
             </div>
 
@@ -188,91 +139,44 @@
     </section>
 
 
-
-    <!-- TOTAL SUMMARY -->
+    <!-- Summary -->
     <section class="summary">
 
-        <!-- TOTAL PIECES -->
         <div class="summary-box">
-
-            <span>
-                Total Pieces
-            </span>
-
-            <strong id="totalPieces">
-                0
-            </strong>
-
+            <span>Total Pieces</span>
+            <strong id="totalPieces">0</strong>
         </div>
 
-
-        <!-- TOTAL WEIGHT -->
         <div class="summary-box">
-
-            <span>
-                Total Weight
-            </span>
+            <span>Total Weight</span>
 
             <strong>
-
-                <span id="totalWeight">
-                    0.000
-                </span>
-
-                <span class="unit">
-                    g
-                </span>
-
+                <span id="totalWeight">0.000</span>
+                <span class="unit">g</span>
             </strong>
-
         </div>
 
-
-        <!-- TOTAL FINE -->
         <div class="summary-box fine-box">
-
-            <span>
-                Total Fine Silver
-            </span>
+            <span>Total Fine Silver</span>
 
             <strong>
-
-                <span id="totalFine">
-                    0.000
-                </span>
-
-                <span class="unit">
-                    g
-                </span>
-
+                <span id="totalFine">0.000</span>
+                <span class="unit">g</span>
             </strong>
-
         </div>
 
-
-        <!-- TOTAL MAJURI -->
         <div class="summary-box majuri-box">
-
-            <span>
-                Total Majuri
-            </span>
+            <span>Total Majuri</span>
 
             <strong>
-
-                <span id="totalMajuri">
-                    0.00
-                </span>
-
+                ₹<span id="totalMajuri">0.00</span>
             </strong>
-
         </div>
 
     </section>
 
 </div>
 
-
-<!-- JAVASCRIPT -->
 <script src="script.js"></script>
 
 </body>
